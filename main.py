@@ -141,7 +141,7 @@ def old_Tow():
     global loop
     user = []
     ____banner____()
-    limit = 1000  # تم تقليل العدد ليكون عملي ومناسب للتنفيذ المستمر
+    limit = 99999# تم تقليل العدد ليكون عملي ومناسب للتنفيذ المستمر
     prefixes = ['100003', '100004']
     for _ in range(limit):
         prefix = random.choice(prefixes)
